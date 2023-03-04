@@ -10,3 +10,6 @@ To develop:
 2. run pip install -r requirements.txt
 3. python main.py verb tense
 4. Happy coding
+
+
+NOTE: Right now, this tool is developed to only support spanish.
