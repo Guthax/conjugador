@@ -8,9 +8,10 @@ class VerbEngine:
     def conjugate(self, verb, tense):
         res = self.engine.conjugate(verb)
 
-        for k,v in res[translations[tense][0]][translations[tense][1]].items():
-            print(k, v)
-
-
-    def print_value(self):
-        print("test")
+        if tense not in translations:
+            print("Invalid tense, choose one of the following:")
+            for k in translations.keys():
+                print(k)
+        else:
+            for k,v in res[translations[tense][0]][translations[tense][1]].items():
+                print(k, v)
