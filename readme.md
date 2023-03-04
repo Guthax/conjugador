@@ -8,5 +8,5 @@ Mlconjug3 is an awesome tool but it returs verb info in a huge dictiory will all
 To develop:
 1. Clone this repo
 2. run pip install -r requirements.txt
-3. python main.py <verb> <tense>
+3. python main.py verb tense
 4. Happy coding
