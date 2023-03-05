@@ -1,15 +1,31 @@
-# Conjugador
-While learning spanish, I constantly needed to look up verb conjugations on esfacil.eu. This is a great site but required an internet connection and navigation to the site each time was annoying. This is the reason I created conjugador, a *very* simple command line tool to conjugate verbs. 
+![logo](/docs/img/logo.png)
 
-The application usses the mlconjug3 library, which is an opensource machine learning library for language conjugtaion. Originally, I wanted to use a REST API but this requires both an internet connection and an API key.
+`Conjugador` is a simple verb conjugation command-line tool.
 
-Mlconjug3 is an awesome tool but it returs verb info in a huge dictiory will all the tenses together. This program picks the exact form you need and simply prints it.
 
-To develop:
-1. Clone this repo
-2. run pip install -r requirements.txt
-3. python main.py verb tense
-4. Happy coding
+# Usage
+```usage: Conjugador [-h] [-t TENSES [TENSES ...]] verb
 
+Conjugates verb into given tenses
+
+positional arguments:
+  verb                  The verb to be conjugated.
+
+options:
+  -h, --help            show this help message and exit
+  -t TENSES [TENSES ...], --tenses TENSES [TENSES ...]
+                        the specified verb should be conjugated to.When not specified, all tenses are used.`
+```
 
 NOTE: Right now, this tool is developed to only support spanish.
+
+
+# Installation
+1. Clone this report
+2. Run `pip install -r requirements.txt` (I recommend using a virtual env)
+3. Run `./src/main.py *verb* -t [tenses]
+
+# Contribution
+Read contributions documentation in docs folder.
+
+Note: Program is in very early development.
