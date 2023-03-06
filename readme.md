@@ -24,6 +24,7 @@ NOTE: Right now, this tool is developed to only support spanish.
 1. Clone this report
 2. Run `pip install -r requirements.txt` (I recommend using a virtual env)
 3. Run `./src/main.py *verb* -t [tenses]
+4. For tests, add project folder to PYTHONPATH and run `python -m unittest` in tests folder.
 
 # Contribution
 Read contributions documentation in docs folder.
