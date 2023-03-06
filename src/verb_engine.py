@@ -16,25 +16,53 @@ class VerbEngine:
         self.language = language
         pass
 
-    def _print_verb_in_tense(self, conjugations, tense):
+    def conjugate(self, verb, tenses):
+        """
+        Conjugates verb into a list of tenses.
+
+        args:
+            verb (String): verb to conjugate.
+            tenses [String]: tenses to conjugate verb into.
+        """
+
+
+class VerbEngineML(VerbEngine):
+    """
+    Verb engine extension which using Machine learning.
+    """
+
+    def __init__(self, language):
+        super().__init__(language)
+
+    def _create_conjugation_dictionary_for_single_tense(self, conjugations, tense):
+        """
+        Creates conjugation dictionary for single tense.
+
+        args:
+            conjugations (Dict): Full verb conjugation dictionary from mlconjug3,
+            containing all conjugations for all.
+            tense (String): Tense to extract from conjugation dictionary.
+        """
         verb_dict = conjugations[translations[tense][0]][translations[tense][1]]
 
-        print(f"----------[{tense}]----------")
+        conjugation_dict = {}
         try:
             for key, value in verb_dict.items():
-                print(key, value)
+                conjugation_dict[key] = value
         except AttributeError:
             # Could be that its a gerund or participant and the conjugation is given as a string.
-            print(verb_dict)
-        print("-------------------------------")
+            conjugation_dict = {"Todo": verb_dict}
 
-    def conjugate(self, verb, tenses):
+        return conjugation_dict
+
+
+    def create_conjugation_dictionary_for_tense_list(self, verb, tenses):
         """
         Conjugates given verb to the provided tense.
 
         args:
             verb (String): Given verb.
-            tense (String): Given tense.
+            tenses [String]: Tenses to conjugate verb to.
         """
 
         conjugations = self.engine.conjugate(verb)
@@ -43,12 +71,29 @@ class VerbEngine:
                   Please make sure the inputted verb is in the spanish dictionary.")
             return
 
+        full_conjugation_dictionary = {}
         if tenses is None:
             for available_tense in translations:
-                self._print_verb_in_tense(conjugations, available_tense)
+                conjugation_dictionary =self._create_conjugation_dictionary_for_single_tense(conjugations, available_tense)
+                full_conjugation_dictionary[available_tense] = conjugation_dictionary
         else:
             for tense in tenses:
                 if tense in translations:
-                    self._print_verb_in_tense(conjugations, tense)
+                    conjugation_dictionary = self._create_conjugation_dictionary_for_single_tense(conjugations, tense)
+                    full_conjugation_dictionary[tense] = conjugation_dictionary
                 else:
                     print(f"{tense} is not a valid tense in the language {self.language}.")
+        return full_conjugation_dictionary
+
+    def print_conjugation_dictionary(self, conjugation_dictionary):
+        """
+        Prints a conjugation dictionary.
+
+        args:
+            conjugation_dictionary (Dict): Conjugation dictionary to print.
+        """
+        for tense in conjugation_dictionary:
+            print(f"--------[{tense}]--------")
+            for key, value in conjugation_dictionary[tense].items():
+                print(key, value)
+            print("--------------------------")
