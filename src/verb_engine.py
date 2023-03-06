@@ -1,5 +1,5 @@
 from mlconjug3.mlconjug import Conjugator
-from translation_dict import translations
+from src.translation_dict import translations
 
 class VerbEngine:
     """
@@ -12,7 +12,7 @@ class VerbEngine:
         args:
             language (String): Abbreviation of the language(i.e nl, eng, esp)
         """
-        self.engine = Conjugator(language)
+        self.mlconjug3_engine = Conjugator(language)
         self.language = language
         pass
 
@@ -65,7 +65,7 @@ class VerbEngineML(VerbEngine):
             tenses [String]: Tenses to conjugate verb to.
         """
 
-        conjugations = self.engine.conjugate(verb)
+        conjugations = self.mlconjug3_engine.conjugate(verb)
         if conjugations is None:
             print(f"Conjugation failed on {verb}. \
                   Please make sure the inputted verb is in the spanish dictionary.")
@@ -74,7 +74,7 @@ class VerbEngineML(VerbEngine):
         full_conjugation_dictionary = {}
         if tenses is None:
             for available_tense in translations:
-                conjugation_dictionary =self._create_conjugation_dictionary_for_single_tense(conjugations, available_tense)
+                conjugation_dictionary = self._create_conjugation_dictionary_for_single_tense(conjugations, available_tense)
                 full_conjugation_dictionary[available_tense] = conjugation_dictionary
         else:
             for tense in tenses:
