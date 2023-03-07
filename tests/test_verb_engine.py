@@ -1,8 +1,9 @@
-import io
-import sys
 import unittest
-
-from src.verb_engine import VerbEngineML
+try:
+    import context
+except ModuleNotFoundError:
+    import test.context   
+from conjugador.verb_engine import VerbEngineML
 
 
 class TestConjugations(unittest.TestCase):
