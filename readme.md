@@ -22,9 +22,10 @@ NOTE: Right now, this tool is developed to only support spanish.
 
 # Installation
 1. Clone this report
-2. Run `pip install -r requirements.txt` (I recommend using a virtual env)
-3. Run `./src/main.py *verb* -t [tenses]
-4. For tests, add project folder to PYTHONPATH and run `python -m unittest` in tests folder.
+2. `cd` into project dir
+2. Run `pip install -r requirements.txt` (I recommend using a virtual env)`
+3. Run `cd conjugador`
+4. Run `python conjugador.py <verb> <tenses>` or `python -m unittest discover -s ../tests` for running tests.
 
 # Contribution
 Read contributions documentation in docs folder.
