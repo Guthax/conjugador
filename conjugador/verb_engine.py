@@ -1,7 +1,8 @@
+from abc import ABC, abstractmethod
+from config.tense_translations_ml import translations
 from mlconjug3.mlconjug import Conjugator
-from src.translation_dict import translations
 
-class VerbEngine:
+class VerbEngine(ABC):
     """
     Class handling all verb conjugations.
     """
@@ -10,19 +11,39 @@ class VerbEngine:
         Initializes mlconjug object to the given language.
 
         args:
-            language (String): Abbreviation of the language(i.e nl, eng, esp)
+            language (String): Abbreviation of the language(i.e nl, eng, es)
         """
         self.mlconjug3_engine = Conjugator(language)
         self.language = language
-        pass
 
-    def conjugate(self, verb, tenses):
+    @abstractmethod
+    def _create_conjugation_dictionary_for_single_tense(self, conjugations, tense):
         """
-        Conjugates verb into a list of tenses.
+        Creates conjugation dictionary for single tense.
 
         args:
-            verb (String): verb to conjugate.
-            tenses [String]: tenses to conjugate verb into.
+            conjugations (Dict): Full verb conjugation dictionary from mlconjug3,
+            containing all conjugations for all.
+            tense (String): Tense to extract from conjugation dictionary.
+        """
+
+    @abstractmethod
+    def create_conjugation_dictionary_for_tense_list(self, verb, tenses):
+        """
+        Conjugates given verb to the provided tense.
+
+        args:
+            verb (String): Given verb.
+            tenses [String]: Tenses to conjugate verb to.
+        """
+
+    @abstractmethod
+    def print_conjugation_dictionary(self, conjugation_dictionary):
+        """
+        Prints a conjugation dictionary.
+
+        args:
+            conjugation_dictionary (Dict): Conjugation dictionary to print.
         """
 
 
@@ -33,6 +54,7 @@ class VerbEngineML(VerbEngine):
 
     def __init__(self, language):
         super().__init__(language)
+        self.translations = translations[language]
 
     def _create_conjugation_dictionary_for_single_tense(self, conjugations, tense):
         """
@@ -43,7 +65,7 @@ class VerbEngineML(VerbEngine):
             containing all conjugations for all.
             tense (String): Tense to extract from conjugation dictionary.
         """
-        verb_dict = conjugations[translations[tense][0]][translations[tense][1]]
+        verb_dict = conjugations[self.translations[tense][0]][self.translations[tense][1]]
 
         conjugation_dict = {}
         try:
@@ -51,7 +73,7 @@ class VerbEngineML(VerbEngine):
                 conjugation_dict[key] = value
         except AttributeError:
             # Could be that its a gerund or participant and the conjugation is given as a string.
-            conjugation_dict = {"Todo": verb_dict}
+            conjugation_dict = {"All forms": verb_dict}
 
         return conjugation_dict
 
@@ -73,12 +95,12 @@ class VerbEngineML(VerbEngine):
 
         full_conjugation_dictionary = {}
         if tenses is None:
-            for available_tense in translations:
+            for available_tense in self.translations:
                 conjugation_dictionary = self._create_conjugation_dictionary_for_single_tense(conjugations, available_tense)
                 full_conjugation_dictionary[available_tense] = conjugation_dictionary
         else:
             for tense in tenses:
-                if tense in translations:
+                if tense in self.translations:
                     conjugation_dictionary = self._create_conjugation_dictionary_for_single_tense(conjugations, tense)
                     full_conjugation_dictionary[tense] = conjugation_dictionary
                 else:

@@ -1,7 +1,6 @@
-import sys
 import argparse
+import config.supported_languages
 from verb_engine import VerbEngineML
-
 
 def __configure__arg_parser():
     """
@@ -21,6 +20,11 @@ def __configure__arg_parser():
 if __name__ == "__main__":
     parser = __configure__arg_parser()
     args = parser.parse_args()
-    engine = VerbEngineML("es")
-    conjugations = engine.create_conjugation_dictionary_for_tense_list(args.verb, args.tenses)
-    engine.print_conjugation_dictionary(conjugations)
+
+    language = "es"
+    if language not in config.supported_languages.supported_languages:
+        print("Not a valid language")
+    else:
+        engine = VerbEngineML(language)
+        conjugations = engine.create_conjugation_dictionary_for_tense_list(args.verb, args.tenses)
+        engine.print_conjugation_dictionary(conjugations)
