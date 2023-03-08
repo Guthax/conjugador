@@ -17,7 +17,11 @@ options:
                         the specified verb should be conjugated to.When not specified, all tenses are used.`
 ```
 
-NOTE: Right now, this tool is developed to only support spanish.
+| Language | Supported |
+|----------|-----------|
+|Spanish   |   [x]      |
+|          |           |
+|          |           |
 
 ## Examples
 ```
