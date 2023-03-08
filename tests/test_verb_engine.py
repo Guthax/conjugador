@@ -6,6 +6,8 @@ from conjugador.verb_engine import VerbEngineML
 class TestConjugations(unittest.TestCase):
     """
     Tests creation of conjugation dictionaries.
+
+    Dont test mlconjugs inner workings. Assume they are correct.
     """
     def setUp(self):
         self.engine = VerbEngineML("es")

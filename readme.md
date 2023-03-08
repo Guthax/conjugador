@@ -39,6 +39,13 @@ python conjugador.py irse -t present future gerund : Get conjugations in present
 2. Run `pip install -r requirements.txt` (I recommend using a virtual env)
 4. Run `python conjugador.py <verb> <tenses>` or `python -m unittest discover` for running tests.
 
+## Coverage
+The coverage tool can be run to analyze branch and line coverage.
+To run:
+1. `cd` to project directory
+2. `coverage run -m unittest discover`
+3. If you want, you can generate a html coverage report with `coverage html`.
+
 # Contribution
 Read contributions documentation in docs folder.
 
