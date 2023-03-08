@@ -34,7 +34,7 @@ python conjugador.py irse -t present future gerund : Get conjugations in present
 # Installation
 1. Clone this repo
 2. `cd` into project dir
-2. Run `pip install -r requirements.txt` (I recommend using a virtual env)`
+2. Run `pip install -r requirements.txt` (I recommend using a virtual env)
 4. Run `python conjugador.py <verb> <tenses>` or `python -m unittest discover` for running tests.
 
 # Contribution
