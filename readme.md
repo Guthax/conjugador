@@ -2,6 +2,9 @@
 
 `Conjugador` is a simple verb conjugation command-line tool.
 
+| Language | Supported |
+|----------|-----------|
+|Spanish   |  yes      |
 
 # Usage
 ```usage: Conjugador [-h] [-t TENSES [TENSES ...]] verb
@@ -17,9 +20,6 @@ options:
                         the specified verb should be conjugated to.When not specified, all tenses are used.`
 ```
 
-| Language | Supported |
-|----------|-----------|
-|Spanish   |  yes      |
 
 ## Examples
 ```
