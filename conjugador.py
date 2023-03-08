@@ -1,6 +1,6 @@
 import argparse
-import config.supported_languages
-from verb_engine import VerbEngineML
+from conjugador.config.supported_languages import supported_languages
+from conjugador.verb_engine import VerbEngineML
 
 def __configure__arg_parser():
     """
@@ -22,7 +22,7 @@ if __name__ == "__main__":
     args = parser.parse_args()
 
     language = "es"
-    if language not in config.supported_languages.supported_languages:
+    if language not in supported_languages:
         print("Not a valid language")
     else:
         engine = VerbEngineML(language)
