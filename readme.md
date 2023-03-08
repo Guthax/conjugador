@@ -19,9 +19,7 @@ options:
 
 | Language | Supported |
 |----------|-----------|
-|Spanish   |   [x]      |
-|          |           |
-|          |           |
+|Spanish   |  yes      |
 
 ## Examples
 ```
