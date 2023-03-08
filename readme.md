@@ -43,7 +43,7 @@ python conjugador.py irse -t present future gerund : Get conjugations in present
 The coverage tool can be run to analyze branch and line coverage.
 To run:
 1. `cd` to project directory
-2. `coverage run -m unittest discover`
+2. Run `coverage run -m unittest discover && coverage report`
 3. If you want, you can generate a html coverage report with `coverage html`.
 
 # Contribution
