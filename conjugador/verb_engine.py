@@ -2,6 +2,8 @@ from abc import ABC, abstractmethod
 from conjugador.config.tense_translations_ml import translations
 from conjugador.config.reflexive_verbs import reflexive_verb_ending
 from conjugador.config.reflexive_verbs import reflexive_verb_persons
+from conjugador.exceptions.ConjugationFailedException import ConjugationFailedException
+from conjugador.exceptions.TenseNotFoundException import TenseNotFoundException
 from mlconjug3.mlconjug import Conjugator
 
 class VerbEngine(ABC):
@@ -110,9 +112,8 @@ class VerbEngineML(VerbEngine):
 
         conjugations = self.mlconjug3_engine.conjugate(verb)
         if conjugations is None:
-            print(f"Conjugation failed on {verb}. \
+            raise ConjugationFailedException(f"Conjugation failed on {verb}. \
                   Please make sure the inputted verb is in the spanish dictionary.")
-            return
 
         full_conjugation_dictionary = {}
         reflexive_verb = self._check_if_verb_reflexive(verb)
@@ -126,7 +127,7 @@ class VerbEngineML(VerbEngine):
                     conjugation_dictionary = self._create_conjugation_dictionary_for_single_tense(conjugations,reflexive_verb, tense)
                     full_conjugation_dictionary[tense] = conjugation_dictionary
                 else:
-                    print(f"{tense} is not a valid tense in the language {self.language}.")
+                    raise TenseNotFoundException(f"{tense} is not a valid tense in the language {self.language}.")
         return full_conjugation_dictionary
 
     def print_conjugation_dictionary(self, conjugation_dictionary):
