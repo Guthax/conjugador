@@ -1,6 +1,6 @@
 ![logo](/docs/img/logo.png)
 
-`Conjugador` is a simple verb conjugation command-line tool.
+`Conjugador` is a simple verb conjugation command-line tool to help you learn spanish using machine learning.
 
 | Language | Supported |
 |----------|-----------|
